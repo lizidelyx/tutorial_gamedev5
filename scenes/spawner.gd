@@ -10,7 +10,7 @@ func spawn():
 	get_parent().add_child(spawned)
 
 	var spawn_pos = global_position
-	spawn_pos.x = spawn_pos.x + randf_range(-1000, 1000)
+	spawn_pos.x = spawn_pos.x + randf_range(-1000, 2000)
 
 	spawned.global_position = spawn_pos
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://yqmk0vpvnyxr"]
+[gd_scene load_steps=18 format=4 uid="uid://yqmk0vpvnyxr"]
 
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://chgqimvh7rdh6" path="res://assets/Familiar Looking Rocket.png" id="1_v7c66"]
-[ext_resource type="PackedScene" uid="uid://b08lpes1p6pnh" path="res://scenes/WinTrigger.tscn" id="2_6t360"]
+[ext_resource type="Texture2D" uid="uid://bbale34yqctf4" path="res://assets/kenney_platformerpack/PNG/Backgrounds/blue_land.png" id="1_vufh2"]
 [ext_resource type="Texture2D" uid="uid://cluh2ekc38ktx" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_dirt.png" id="2_hwphi"]
 [ext_resource type="Texture2D" uid="uid://76hi8rt1miuo" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_grass.png" id="3_fwrpg"]
 [ext_resource type="Texture2D" uid="uid://pgvs2eknvuao" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_planet.png" id="4_1dgoi"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://271e3fddcdn" path="res://scenes/fallArea.tscn" id="8_drpgs"]
 [ext_resource type="Script" path="res://scenes/spawner.gd" id="9_k24io"]
 [ext_resource type="PackedScene" uid="uid://cas2wkgb1qhbr" path="res://scenes/falling_fish.tscn" id="9_rwyyi"]
+[ext_resource type="Script" path="res://scenes/to_level2.gd" id="10_4ifrc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0j6t"]
+size = Vector2(276.898, 464.26)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5e58s"]
 texture = ExtResource("2_hwphi")
@@ -127,15 +131,23 @@ sources/3 = SubResource("TileSetAtlasSource_m7thx")
 
 [node name="Level1" type="Node2D"]
 
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1479.5, 225)
+scale = Vector2(3.44043, 1)
+texture = ExtResource("1_vufh2")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-light_mask = 3
-visibility_layer = 3
-position = Vector2(3065, 91)
-scale = Vector2(0.799003, 0.683505)
+position = Vector2(3034, 102)
+scale = Vector2(0.892027, 0.626804)
 texture = ExtResource("1_v7c66")
 
-[node name="Area2D" parent="Sprite2D" instance=ExtResource("2_6t360")]
-position = Vector2(-5.00624, 33.6501)
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+script = ExtResource("10_4ifrc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(2.80249, 16.7516)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_t0j6t")
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(319, 151)
@@ -155,4 +167,4 @@ position = Vector2(873, -627)
 script = ExtResource("9_k24io")
 obstacle = ExtResource("9_rwyyi")
 
-[connection signal="body_entered" from="Sprite2D/Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Sprite2D/Area2D" to="Sprite2D/Area2D" method="_on_body_entered"]
