@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://yqmk0vpvnyxr"]
+[gd_scene load_steps=16 format=4 uid="uid://yqmk0vpvnyxr"]
 
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://chgqimvh7rdh6" path="res://assets/Familiar Looking Rocket.png" id="1_v7c66"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://pgvs2eknvuao" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_planet.png" id="4_1dgoi"]
 [ext_resource type="Texture2D" uid="uid://1cmkdw30hlrq" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_snow.png" id="5_nmgur"]
 [ext_resource type="PackedScene" uid="uid://271e3fddcdn" path="res://scenes/fallArea.tscn" id="8_drpgs"]
+[ext_resource type="Script" path="res://scenes/spawner.gd" id="9_k24io"]
+[ext_resource type="PackedScene" uid="uid://cas2wkgb1qhbr" path="res://scenes/falling_fish.tscn" id="9_rwyyi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5e58s"]
 texture = ExtResource("2_hwphi")
@@ -147,5 +149,10 @@ tile_set = SubResource("TileSet_nswr5")
 [node name="Area2D2" parent="." instance=ExtResource("8_drpgs")]
 position = Vector2(1395, 667)
 scale = Vector2(0.799003, 0.683505)
+
+[node name="spawner" type="Node2D" parent="."]
+position = Vector2(873, -627)
+script = ExtResource("9_k24io")
+obstacle = ExtResource("9_rwyyi")
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="Player" method="_on_area_2d_body_entered"]
