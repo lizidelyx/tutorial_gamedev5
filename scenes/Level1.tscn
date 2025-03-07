@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=4 uid="uid://yqmk0vpvnyxr"]
+[gd_scene load_steps=14 format=4 uid="uid://yqmk0vpvnyxr"]
 
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://chgqimvh7rdh6" path="res://assets/Familiar Looking Rocket.png" id="1_v7c66"]
-[ext_resource type="PackedScene" uid="uid://bcmuk0dabelcb" path="res://scenes/WinTrigger.tscn" id="2_6t360"]
+[ext_resource type="PackedScene" uid="uid://b08lpes1p6pnh" path="res://scenes/WinTrigger.tscn" id="2_6t360"]
 [ext_resource type="Texture2D" uid="uid://cluh2ekc38ktx" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_dirt.png" id="2_hwphi"]
 [ext_resource type="Texture2D" uid="uid://76hi8rt1miuo" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_grass.png" id="3_fwrpg"]
 [ext_resource type="Texture2D" uid="uid://pgvs2eknvuao" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_planet.png" id="4_1dgoi"]
 [ext_resource type="Texture2D" uid="uid://1cmkdw30hlrq" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_snow.png" id="5_nmgur"]
+[ext_resource type="PackedScene" uid="uid://271e3fddcdn" path="res://scenes/fallArea.tscn" id="8_drpgs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5e58s"]
 texture = ExtResource("2_hwphi")
@@ -142,5 +143,9 @@ collision_mask = 3
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAACAAIAAwABAAAAAAABAAIAAwABAAAAAAAAAAEAAwABAAAAAAAAAAIAAwABAAAAAAADAAIAAwAHAAAAAAAEAAIAAwAHAAEAAAAFAAIAAwAHAAEAAAAGAAIAAwAHAAEAAAAHAAIAAwAEAAEAAAAIAAMAAwAEAAEAAAAHAAMAAwAHAAAAAAAIAAQAAwAHAAAAAAAHAAQAAwABAAAAAAAJAAQAAwAHAAEAAAAKAAQAAwAHAAEAAAALAAQAAwAIAAEAAAANAAQAAwADAAAAAAAOAAQAAwAHAAEAAAAPAAQAAwAHAAEAAAAQAAQAAwAEAAAAAAASAAQAAwADAAAAAAATAAQAAwAIAAAAAAAUAAQAAwABAAAAAAAUAAMAAwABAAAAAAAVAAIAAwABAAAAAAAVAAMAAwABAAAAAAAVAAQAAwABAAAAAAAWAAIAAwAHAAAAAAAXAAIAAwAHAAEAAAAYAAIAAwAHAAEAAAAAAAMAAwABAAAAAAABAAMAAwABAAAAAAACAAMAAwABAAAAAAADAAMAAwABAAAAAAAEAAMAAwABAAAAAAAFAAMAAwABAAAAAAAGAAMAAwABAAAAAAAGAAQAAwABAAAAAAAFAAQAAwABAAAAAAAEAAQAAwABAAAAAAADAAQAAwABAAAAAAACAAQAAwABAAAAAAABAAQAAwABAAAAAAAAAAQAAwABAAAAAAD//wQAAwABAAAAAAD+/wQAAwABAAAAAAD+/wMAAwABAAAAAAD+/wIAAwABAAAAAAD+/wEAAwABAAAAAAD+/wAAAwABAAAAAAD//wAAAwABAAAAAAD//wEAAwABAAAAAAD//wIAAwABAAAAAAD//wMAAwABAAAAAAAAAAAAAwABAAAAAAA=")
 tile_set = SubResource("TileSet_nswr5")
+
+[node name="Area2D2" parent="." instance=ExtResource("8_drpgs")]
+position = Vector2(1395, 667)
+scale = Vector2(0.799003, 0.683505)
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="Player" method="_on_area_2d_body_entered"]
