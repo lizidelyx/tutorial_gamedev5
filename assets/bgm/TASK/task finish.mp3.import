@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://fwg4smuc3pse"
+path="res://.godot/imported/task finish.mp3-eab6b5fad0b0faff4161bb0485450e28.mp3str"
+
+[deps]
+
+source_file="res://assets/bgm/TASK/task finish.mp3"
+dest_files=["res://.godot/imported/task finish.mp3-eab6b5fad0b0faff4161bb0485450e28.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

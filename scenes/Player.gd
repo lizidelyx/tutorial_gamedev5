@@ -1,41 +1,61 @@
 extends CharacterBody2D
 
-@export var speed: int = 400
-@export var gravity: int = 1000
-@export var jump_speed: int = -400
-@export var max_jumps: int = 2  # Bisa lompat dua kali
+@export var walk_speed = 200
+@export var crouch_speed = 100
+@export var gravity = 200.0
+@export var jump_speed = -300
+@export var push_force = 500.0  # Kekuatan dorongan terhadap box
+@onready var sprite = $AnimatedSprite2D
+@onready var sfx_walk = $sfx_walk
 
-var jump_count: int = 0  # Hitungan jumlah lompatan
-
-func get_input():
-	velocity.x = 0
-
-	# Reset jump count saat menyentuh lantai
-	if is_on_floor():
-		jump_count = 0  
-
-	# Lompat pertama & kedua
-	if Input.is_action_just_pressed("jump") and jump_count < max_jumps:
-		velocity.y = jump_speed
-		jump_count += 1  # Tambah hitungan lompatan
-
-	if Input.is_action_pressed("right"):
-		velocity.x += speed
-	if Input.is_action_pressed("left"):
-		velocity.x -= speed
+var push = false
+var jumps_left = 2
+var is_crouching = false
 
 func _physics_process(delta):
 	velocity.y += delta * gravity
-	get_input()
-	move_and_slide()
 
-func _process(_delta):
-	if not is_on_floor():
-		$Animator.play("Jump")
-	elif velocity.x != 0:
-		$Animator.play("Walk")
+	if is_on_floor():
+		jumps_left = 2
+
+	if Input.is_action_just_pressed("ui_up") and jumps_left > 0:
+		velocity.y = jump_speed
+		jumps_left -= 1
+
+	if Input.is_action_pressed("ui_down"):
+		is_crouching = true
+		sprite.play("crouch")
 	else:
-		$Animator.play("Idle")
+		is_crouching = false
 
-	if velocity.x != 0:
-		$Sprite2D.flip_h = velocity.x < 0
+	var move_direction = 0
+
+	if Input.is_action_pressed("ui_left"):
+		move_direction = -1
+		sprite.flip_h = true
+		if not is_crouching:
+			sprite.play("walk")
+			if not sfx_walk.playing:  # **Cegah suara bertumpuk**
+				sfx_walk.play()
+
+	elif Input.is_action_pressed("ui_right"):
+		move_direction = 1
+		sprite.flip_h = false
+		if not is_crouching:
+			sprite.play("walk")
+			if not sfx_walk.playing:  # **Cegah suara bertumpuk**
+				sfx_walk.play()
+			
+	else:
+		if not is_crouching:
+			sprite.play("idle")
+		sfx_walk.stop()  # **Hentikan suara langkah saat karakter diam**
+
+	# **Tambahan:** Jika tidak berada di lantai, animasi "jump" akan dimainkan
+	if not is_on_floor():
+		sprite.play("jump")
+		sfx_walk.stop()
+
+	velocity.x = move_direction * (crouch_speed if is_crouching else walk_speed)
+
+	move_and_slide()

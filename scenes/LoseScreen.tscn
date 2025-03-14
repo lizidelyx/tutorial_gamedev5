@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://crfke6306urxr"]
+[gd_scene load_steps=3 format=3 uid="uid://crfke6306urxr"]
 
 [ext_resource type="Texture2D" uid="uid://bi5p7hlw4wlhv" path="res://assets/dead.jpg" id="1"]
+[ext_resource type="AudioStream" uid="uid://bl03jqdha5kys" path="res://assets/bgm/TASK/wrong answer.mp3" id="2_ftx1h"]
 
 [node name="LoseScreen" type="Node2D"]
 
@@ -8,3 +9,7 @@
 position = Vector2(512, 320)
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("1")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ftx1h")
+autoplay = true

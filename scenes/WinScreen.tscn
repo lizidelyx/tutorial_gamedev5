@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq4v1m54r3qda"]
+[gd_scene load_steps=3 format=3 uid="uid://dq4v1m54r3qda"]
 
 [ext_resource type="Texture2D" uid="uid://d0xi3jghkp5hk" path="res://assets/Keanu.png" id="1"]
+[ext_resource type="AudioStream" uid="uid://fwg4smuc3pse" path="res://assets/bgm/TASK/task finish.mp3" id="2_g6m05"]
 
 [node name="WinScreen" type="Sprite2D"]
 position = Vector2(512.329, 294.151)
 texture = ExtResource("1")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_g6m05")
